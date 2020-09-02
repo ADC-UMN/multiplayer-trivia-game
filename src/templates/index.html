@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %} WhoDaMan - A trivia game {% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <div>
+      <header>
+        <h1>WhoDaMan</h1>
+      </header>
+      <main >
+        <form id="start">
+          <input id="room" type="text" placeholder="Game Name" />
+        </form>
+        <p>
+          Answer trivia questions with friends!
+        </p>
+      </main>
+    </div>
+    <footer><a href="/admin">Create a game</a></footer>
+{% endblock %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+{% endblock %}

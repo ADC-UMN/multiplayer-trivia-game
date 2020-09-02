@@ -1,0 +1,51 @@
+
+{% extends "layout.html" %}
+{% block title %} WhoDaMan - Admin {% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <form id="start" class="center">
+      <main>
+          <header>
+            <h1>WhoDaMan</h1>
+          </header>
+          <input id="room" type="text" placeholder="Game Name" />
+          <p>Create a game, and start buzzing in!</p>
+      </main>
+    </form>
+    <main>
+      <section id="panel">
+        <div class="panel__header">
+          <h1>WhoDaMan</h1>
+          <input id="shareLink" disabled />
+        </div>
+        <div class="panel">
+          <div class="panel__header">
+            <div class="panel__label">Leaderboard</div>
+          </div>
+          <ul id="leaderboard">
+          </ul>
+          <div class="panel__header">
+            <div class="panel__label">Players &mdash; <span id="roomCount"></span></div>
+            <div>
+              <button id="begin">Begin</button>
+              <button id="done" style="display: none;">Done</button>
+              <button id="reset" style="display: none;">Next</button>
+            </div>
+          </div>
+          <ul id="qcontent">
+          </ul>
+          <div class="panel__header">
+            <div class="panel__label">Buzzes</div>
+            <button id="skip" style="display: none;">Skip</button>
+          </div>
+          <ul id="buzzes">
+          </ul>
+        </div>
+      </section>
+    </main>
+{% endblock %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='admin.js') }}"></script>
+{% endblock %}

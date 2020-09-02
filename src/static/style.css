@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+}
+
+body {
+  font-family: "San Francisco", system-ui, -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+  background: #E02141;
+  color: #fefefe;
+  text-align: center;
+  padding-bottom: 2rem;
+}
+
+.body--admin {
+  background: #6a21e0;
+}
+
+main {
+  max-width: 96%;
+  width: 30rem;
+  margin: auto;
+  padding: 0 0 3rem 0;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+h1 {
+  font-family: 'Lobster', cursive;
+  font-weight: normal;
+  font-size: 3rem;
+  margin-top: 0;
+  text-align: left;
+}
+
+header h1 {
+  text-align: center;
+}
+
+h2 {
+  text-align: left;
+  margin-top: 0;
+}
+
+.paragraph {
+  font-size: .888888889rem;
+  line-height: 1.5em;
+  padding: 1rem;
+}
+
+.li {
+  display: block;
+  margin-left: 1.5rem;
+  margin-top: -1.3rem;
+  margin-bottom: .5rem;
+}
+  
+
+input {
+  display: block;
+  padding: .5rem 1rem;
+  width: 100%;
+  border: 0;
+  border-radius: 50px;
+  font-size: inherit;
+  text-align: center;
+  outline: 0;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.4), 0 3px 18px -5px rgba(0,0,0,.2);
+}
+
+input:focus {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.6), 0 3px 18px -5px rgba(0,0,0,.2);
+}
+
+#shareLink {
+  background: rgba(255, 255, 255, 0.41);
+  box-shadow: none;
+  width: auto;
+  margin-top: 1.25rem;
+  color: white;
+  font-size: .83rem;
+  padding: .5rem;
+  border-radius: 2px;
+}
+
+button {
+  border-radius: 3px;
+  border: none;
+  background-image: linear-gradient(180deg, #ffffff 0%, #fbdfe4 100%);
+  cursor: pointer;
+  padding: 0.5em 1.5em;
+  font: inherit;
+  color: #42393d;
+  font-size: .8333rem;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+#buzz {
+  margin: auto;
+  border-radius: 100%;
+  height: 10rem;
+  width: 10rem;
+  border-bottom: .7rem solid #f8c8d0;
+  font-size: 3rem;
+  text-align: center;
+  padding: 0;
+}
+
+#buzz:active {
+  border-bottom-width: 3px;
+}
+
+#state {
+  color: rgba(255,255,255, .7);
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  border-radius: 3px;
+  margin-bottom: 5px;
+  background: white;
+  padding: .5rem 1rem;
+  font-size: 1rem;
+  text-align: left;
+  color: #42393d;
+}
+
+#panel {
+  display: none;
+}
+
+.panel {
+  width: 85%;
+  margin: auto;
+}
+
+.panel__header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.panel__label {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1.25rem;
+  color: rgba(255,255,255,.5);
+  text-align: left;
+  font-weight: 500;
+  margin: .35rem 0;
+}
+
+footer {
+  position: fixed;
+  text-align: right;
+  width: 100%;
+  padding: 0 1rem;
+  color: white;
+  bottom: 0;
+  font-size: .888888889rem;
+}
+
+footer a {
+  display: inline-block;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.4);
+  padding: .5rem 1rem;
+  border-radius: 50px;
+  margin: .5rem 0;
+  text-decoration: none;
+}
+
+footer a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.judge {
+  cursor:pointer;
+}
