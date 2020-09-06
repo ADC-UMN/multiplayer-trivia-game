@@ -161,4 +161,4 @@ if __name__ == '__main__':
 
 Running `python app.py` on the command line will allow you to view your game on `localhost:5000`.
 
-I challenge you to try to add other new features to the game!
+I challenge you to try to add other new features to the game! How would you add the functionality for 'Daily Doubles'? Real-time chat? Drawing questions from other APIs/databases?
