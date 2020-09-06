@@ -94,7 +94,7 @@ $skipButton.on('click', async function() {
 function correct(name) {
   leaderboard[name] += stakes
   $leaderboard.html(`
-    ${Object.entries(leaderboard).map(([key, value]) => `<li class="panel__header">${key}<span>${value}</span></li>`).join('')}
+    ${Object.entries(leaderboard).sort((a,b) => b[1]-a[1]).map(([key, value]) => `<li class="panel__header">${key}<span>${value}</span></li>`).join('')}
   `)
   $buzzes.html('')
   $resetButton.click()
@@ -105,7 +105,7 @@ function correct(name) {
 function incorrect(name) {
   leaderboard[name] -= stakes
   $leaderboard.html(`
-    ${Object.entries(leaderboard).map(([key, value]) => `<li class="panel__header">${key}<span>${value}</span></li>`).join('')}
+    ${Object.entries(leaderboard).sort((a,b) => b[1]-a[1]).map(([key, value]) => `<li class="panel__header">${key}<span>${value}</span></li>`).join('')}
   `)
   $buzzes.find(':first-child').remove()
   const next_name = $buzzes.find(':first-child').text().split(' ')[0]
