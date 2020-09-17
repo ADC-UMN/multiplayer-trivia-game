@@ -62,6 +62,9 @@ This template uses a special type of expression called blocks. They're good for 
         <div class="panel">
           <div class="panel__header">
             <div class="panel__label">Leaderboard</div>
+            <div>
+              <button id="reset">Reset</button>
+            </div>
           </div>
           <ul id="leaderboard">
           </ul>
@@ -70,7 +73,6 @@ This template uses a special type of expression called blocks. They're good for 
             <div>
               <button id="begin">Begin</button>
               <button id="done" style="display: none;">Done</button>
-              <button id="reset" style="display: none;">Next</button>
             </div>
           </div>
           <ul id="qcontent">
@@ -87,6 +89,11 @@ This template uses a special type of expression called blocks. They're good for 
 {% endblock %}
 {% block scripts %}
     <script src="{{ url_for('static', filename='admin.js') }}"></script>
+    <script>
+    window.onbeforeunload = function(){
+      return "Are you sure you want to close the window?"; // Alert the user when they refresh as that will discard information
+    }
+    </script>
 {% endblock %}
 ```
 
@@ -133,6 +140,11 @@ Feel free to look at `style.css`. It won't be addressed in this workshop.
 {% endblock %}
 {% block scripts %}
     <script src="{{ url_for('static', filename='play.js') }}"></script>
+    <script>
+    window.onbeforeunload = function(){
+      return "Are you sure you want to close the window?"; // Alert the user when they refresh as that will discard information
+    }
+    </script>
 {% endblock %}
 ```
 

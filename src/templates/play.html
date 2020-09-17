@@ -26,4 +26,9 @@
 {% endblock %}
 {% block scripts %}
     <script src="{{ url_for('static', filename='play.js') }}"></script>
+    <script>
+    window.onbeforeunload = function(){
+      return "Are you sure you want to close the window?";
+    }
+    </script>
 {% endblock %}

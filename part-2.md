@@ -175,10 +175,12 @@ async function getData(url) {
 
 $beginButton.on('click', async function() {
     // only async functions can use await
-    socket.emit('reset', data) // play will listen for this
     $beginButton.hide()
     $doneButton.show() // for allowing buzzing after the question is done being read
     const res = await getData('http://jservice.io/api/random?count=1') // try putting this in your address bar to see what the data will look like
+    let reset_data = data
+    reset_data.res = res
+    socket.emit('reset', reset_data) // play will listen for this
     $qcontent.html(`
         <li class="paragraph">
             <b>QUESTION</b>
@@ -191,6 +193,10 @@ $beginButton.on('click', async function() {
         </li>
     `) // use template strings again
   stakes = res[0].value
+  $buzzes.html('') // clear the buzzes for the next question
+  if (res[0].value == null) { // sometimes the API will give us unscored questions
+      $skipButton.click() // just skip in that case
+  }
 })
 
 $doneButton.on('click', function() {
@@ -215,8 +221,7 @@ $skipButton.on('click', async function() {
   stakes = res[0].value
   $buzzes.html('') // clear any buzzes that had already occurred
   // restart the 
-  $doneButton.show()
-  $beginButton.hide()
+  $beginButton.click() // go to the next question
 })
 ```
 
@@ -236,9 +241,9 @@ function correct(name) {
         ${Object.entries(leaderboard).sort((a,b) => b[1]-a[1]).map(([key, value]) => `<li class="panel__header">${key}<span>${value}</span></li>`).join('')}
     `)
     $buzzes.html('') // if a player gets the question right there is no need to judge the rest of the players who buzzed
-    $resetButton.click() // view the next question
     data.leaderboard = leaderboard 
     socket.emit('score', data) // play will listen for this
+    $beginButton.click() // view the next question
 }
 
 function incorrect(name) {
@@ -247,7 +252,10 @@ function incorrect(name) {
         ${Object.entries(leaderboard).sort((a,b) => b[1]-a[1]).map(([key, value]) => `<li class="panel__header">${key}<span>${value}</span></li>`).join('')}
     `)
     $buzzes.find(':first-child').remove()
-    const next_name = $buzzes.find(':first-child').text().split(' ')[0]
+    // find the name of the next player to buzz
+    // explore the DOM in the console
+    // then use jQuery functions to grab what you want
+    const next_name = $buzzes.find(':first-child').contents()[0].data.slice(0, -1)
     // if a player answers incorrectly, they are removed from the queue to judge
     $buzzes.find(':first-child').append(`<span><span class="judge" onclick="correct('${next_name}')">✔️</span> <span class="judge" onclick="incorrect('${next_name}')">❌</span></span>`)
     // the new first child of the buzzes <ul> is the player who buzzed last
@@ -259,6 +267,21 @@ function incorrect(name) {
 socket.on('buzz', function(data) {
     $buzzes.append(`<li class="panel__header">${data.name} ${$buzzes.children().length > 0 ? '' : `<span><span class="judge" onclick="correct('${data.name}')">✔️</span> <span class="judge" onclick="incorrect('${data.name}')">❌</span></span>`}</li>`)
     // only add the ability to judge if the player buzzed in first
+})
+```
+
+We can also create a reset button to clear the leaderboard.
+
+```js
+$resetButton.on('click', function() {
+    for (const key in leaderboard) {
+        leaderboard[key] = 0 // reset the scores
+    }
+    $leaderboard.html(`
+        ${Object.entreis(leaderboard).sort((a,b) => b[1]-a[1]).map(([key, value]) => `<li class="panel__header">${key}<span>${value}</span></li>`).join('')}
+    `)
+    data.leaderboard = leaderboard
+    socket.emit('score', data)
 })
 ```
 
@@ -283,10 +306,20 @@ Remember that the 'reset' event was emitted from the admin page when they either
 
 ```js
 // in play.js
-socket.on('reset', function() {
+socket.on('reset', function(resetData) {
     count = 0
     $buzzButton.hide()
-    $state.show().text('Waiting...')
+    let res = resetData.res
+    $state.show().html(`
+        <li class="paragraph">
+            <b>QUESTION</b>
+            <br>
+            <br>
+            📙 <span class="li">Category &mdash; ${res[0].category.title}</span>
+            💯 <span class="li">Points &mdash; ${res[0].value}</span>
+            🕵️ <span class="li">Question &mdash; ${res[0].question}</span>
+        </li>
+    `)
 })
 ```
 
@@ -297,8 +330,7 @@ The 'begin' event is emitted from the admin page when they click the done button
 ```js
 // in play.js
 socket.on('begin', function() {
-    $buzzButton.show()
-    $state.hide()
+    $buzzButton.show() // allow buzzing
 })
 ```
 

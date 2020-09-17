@@ -1,3 +1,4 @@
+
 {% extends "layout.html" %}
 {% block title %} WhoDaMan - Admin {% endblock %}
 {% block head %}
@@ -22,6 +23,9 @@
         <div class="panel">
           <div class="panel__header">
             <div class="panel__label">Leaderboard</div>
+            <div>
+              <button id="reset">Reset</button>
+            </div>
           </div>
           <ul id="leaderboard">
           </ul>
@@ -30,7 +34,6 @@
             <div>
               <button id="begin">Begin</button>
               <button id="done" style="display: none;">Done</button>
-              <button id="reset" style="display: none;">Next</button>
             </div>
           </div>
           <ul id="qcontent">
@@ -47,4 +50,9 @@
 {% endblock %}
 {% block scripts %}
     <script src="{{ url_for('static', filename='admin.js') }}"></script>
+    <script>
+    window.onbeforeunload = function(){
+      return "Are you sure you want to close the window?";
+    }
+    </script>
 {% endblock %}

@@ -10,3 +10,19 @@ source env/bin/activate
 pip install -r requirements.txt
 python app.py
 ```
+
+## Create a game
+
+![](create.gif)
+
+## Join a game
+
+![](join.gif)
+
+## Read questions and buzz in
+
+![](buzz.gif)
+
+## Get the highest score to win
+
+![](score.gif)

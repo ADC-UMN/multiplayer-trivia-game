@@ -45,13 +45,24 @@ socket.on('score', function(scoreData) {
   $score.html(`${my_score} (${Object.values(scoreData.leaderboard).sort().pop() - my_score} to lead)`)
 })
 
-socket.on('reset', function() {
+socket.on('reset', function(resetData) {
   count = 0
   $buzzButton.hide()
-  $state.show().text('Waiting...')
+  let res = resetData.res
+  // $state.show().text('Waiting...')
+  $state.show().html(`
+    <li class="paragraph">
+      <b>QUESTION</b>
+      <br>
+      <br>
+      📙 <span class="li">Category &mdash; ${res[0].category.title}</span>
+      💯 <span class="li">Points &mdash; ${res[0].value}</span>
+      🕵️ <span class="li">Question &mdash; ${res[0].question}</span>
+    </li>
+  `)
 })
 
 socket.on('begin', function() {
   $buzzButton.show()
-  $state.hide()
+  // $state.hide()
 })

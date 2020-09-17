@@ -6,6 +6,7 @@ app = Flask(__name__)
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
 socketio = SocketIO(app)
+socketio.init_app(app, cors_allowed_origins="*")
 
 # dictionary pairing room name to admin socket id
 rooms = {}
@@ -74,8 +75,9 @@ def on_create(data):
 @socketio.on('reset')
 def on_reset(data):
     room = data['room']
+    res = data['res']
     if is_admin(request.sid, room):
-        emit('reset', room=room)
+        emit('reset', { 'res': res }, room=room)
 
 @socketio.on('begin')
 def on_begin(data):
@@ -91,4 +93,4 @@ def on_score(data):
         emit('score', { 'leaderboard' : leaderboard }, room=room)
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app, debug=True, host='0.0.0.0')

@@ -13,6 +13,7 @@ app = Flask(__name__) # Flask wrapper
 SECRET_KEY = os.urandom(32) # a secret key for encryption purposes of size 32 bytes
 app.config['SECRET_KEY'] = SECRET_KEY # secret key for 
 socketio = SocketIO(app) # SocketIO wrapper
+socketio.init_app(app, cors_allowed_origins="*") # when hosted on a real server, accept requests from clients
 ```
 
 ## Serving the pages
@@ -133,8 +134,9 @@ These events are handled similarly to 'join' and 'buzz' events. They additionall
 @socketio.on('reset')
 def on_reset(data):
     room = data['room']
+    res = data['res']
     if is_admin(request.sid, room):
-        emit('reset', room=room)
+        emit('reset', { 'res': res }, room=room)
 
 @socketio.on('begin')
 def on_begin(data):
@@ -156,7 +158,7 @@ Just add the last lines of code:
 
 ```python
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app, debug=True, host='0.0.0.0') # default host is 127.0.0.1 which will work locally, but will not accept requests from public IPs
 ```
 
 Running `python app.py` on the command line will allow you to view your game on `localhost:5000`.
