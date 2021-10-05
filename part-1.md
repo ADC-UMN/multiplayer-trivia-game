@@ -1,5 +1,7 @@
 # Part 1: Jinja Templating
 
+> See the [slides](slides/part-1.pdf) for this workshop!
+
 ## Introduction
 
 Jinja is a text templating engine. It can work with any text-based format, but we'll work with HTML here. You can write normal HTML in the template as well as add variables between `{{ }}` and expressions between `{% %}`. Let's look at the template in `layout.html`:
