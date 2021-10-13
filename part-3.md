@@ -1,5 +1,7 @@
 # Part 3: Server-side Code
 
+> The [slides](slides/part-2.pdf) go over client-side and server side code together.
+
 ## Introduction
 
 It was easy to write the client-side code of the admin and play pages when we abstracted away the server code and simply assumed its responses to emitted events. Let's see how we can use Flask to serve the web pages and Flask-SocketIO to handle socket events.

@@ -1,5 +1,7 @@
 # Part 2: Client-side Code
 
+> The [slides](slides/part-2.pdf) go over client-side and server side code together.
+
 ## Introduction
 
 The client-side code is meant to handle form submissions and listen to/handle SocketIO events.

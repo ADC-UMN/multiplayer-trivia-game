@@ -6,3 +6,4 @@
 *.out
 *.snm
 *.toc
+src/env
