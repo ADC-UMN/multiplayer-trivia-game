@@ -1,6 +1,6 @@
 # Part 3: Server-side Code
 
-> The [slides](slides/part-2.pdf) go over client-side and server side code together.
+> The slides [here](slides/part-2.pdf) and [here](slides/part-3.pdf) go over client-side and server side code together.
 
 ## Introduction
 
